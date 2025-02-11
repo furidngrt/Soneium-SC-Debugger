@@ -3,11 +3,9 @@ import { ethers } from "ethers";
 import "./app.css";
 
 const ETHERSCAN_API_KEY = "ebb6b7fd-850a-4329-8bad-2457c2e32dc3";
-const RPC_URL = "https://rpc.soneium.org";
 
 function App() {
   const [account, setAccount] = useState<string | null>(null);
-  const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [contractAddress, setContractAddress] = useState("");
   const [functionName, setFunctionName] = useState("");
@@ -23,12 +21,11 @@ function App() {
   }, []);
 
   const connectWallet = async () => {
-    if (window.ethereum) {
+    if ((window as any).ethereum) {
       try {
-        const newProvider = new ethers.BrowserProvider(window.ethereum);
+        const newProvider = new ethers.BrowserProvider((window as any).ethereum);
         const accounts = await newProvider.send("eth_requestAccounts", []);
         const newSigner = await newProvider.getSigner();
-        setProvider(newProvider);
         setSigner(newSigner);
         setAccount(accounts[0]);
       } catch (error) {
@@ -129,84 +126,84 @@ function App() {
   };
 
   return (
-<div className="app-container">
-  <div className="header">
-    <h1 className="title">Soneium Smart Contract Debugger</h1>
-    <button className="connect-btn" onClick={connectWallet}>
-    {account ? `Connected: ${account.slice(0, 4)}..${account.slice(-4)}` : "Connect Wallet"}
-  </button>
-  </div>
+    <div className="app-container">
+      <div className="header">
+        <h1 className="title">Soneium Smart Contract Debugger</h1>
+        <button className="connect-btn" onClick={connectWallet}>
+          {account ? `Connected: ${account.slice(0, 4)}..${account.slice(-4)}` : "Connect Wallet"}
+        </button>
+      </div>
 
-  <div className="box">
-    <h4>Fetch Contract ABI</h4>
-    <div className="input-group">
-      <input
-        type="text"
-        className="input"
-        placeholder="Enter Contract Address"
-        value={contractAddress}
-        onChange={(e) => setContractAddress(e.target.value)}
-      />
-<div className="btn-container">
-  <button className="btn success" onClick={fetchAbiFromEtherscan}>Fetch</button>
-</div>
-    </div>
-  </div>
-
-  <div className="box">
-    <h4>Select Function</h4>
-    <select className="dropdown" onChange={(e) => setFunctionName(e.target.value)}>
-      <option value="">Select a function</option>
-      {availableFunctions.map((func, index) => (
-        <option key={index} value={func}>{func}</option>
-      ))}
-    </select>
-  </div>
-
-  {functionName && (
-    <div className="box">
-      <h4>Enter Parameters</h4>
-      {abi.find((func: any) => func.name === functionName)?.inputs.map((input: any, index: number) => (
-        <div key={index} className="input-group">
-          <label>{input.name} ({input.type})</label>
+      <div className="box">
+        <h4>Fetch Contract ABI</h4>
+        <div className="input-group">
           <input
             type="text"
             className="input"
-            placeholder={`Enter ${input.type}`}
-            value={parameters[index]}
-            onChange={(e) => {
-              const newParams = [...parameters];
-              newParams[index] = e.target.value;
-              setParameters(newParams);
-            }}
+            placeholder="Enter Contract Address"
+            value={contractAddress}
+            onChange={(e) => setContractAddress(e.target.value)}
           />
+          <div className="btn-container">
+            <button className="btn success" onClick={fetchAbiFromEtherscan}>Fetch</button>
+          </div>
         </div>
-      ))}
-<div className="btn-container">
-  <button className="btn info" onClick={generateCallData}>Generate Call Data</button>
-</div>
+      </div>
+
+      <div className="box">
+        <h4>Select Function</h4>
+        <select className="dropdown" onChange={(e) => setFunctionName(e.target.value)}>
+          <option value="">Select a function</option>
+          {availableFunctions.map((func, index) => (
+            <option key={index} value={func}>{func}</option>
+          ))}
+        </select>
+      </div>
+
+      {functionName && (
+        <div className="box">
+          <h4>Enter Parameters</h4>
+          {abi.find((func: any) => func.name === functionName)?.inputs.map((input: any, index: number) => (
+            <div key={index} className="input-group">
+              <label>{input.name} ({input.type})</label>
+              <input
+                type="text"
+                className="input"
+                placeholder={`Enter ${input.type}`}
+                value={parameters[index]}
+                onChange={(e) => {
+                  const newParams = [...parameters];
+                  newParams[index] = e.target.value;
+                  setParameters(newParams);
+                }}
+              />
+            </div>
+          ))}
+          <div className="btn-container">
+            <button className="btn info" onClick={generateCallData}>Generate Call Data</button>
+          </div>
+        </div>
+      )}
+
+      <div className="box">
+        <h4>Generated Call Data</h4>
+        <textarea className="textarea" readOnly value={callData || "No call data generated yet"} />
+      </div>
+
+      <div className="box">
+        <div className="btn-container">
+          <button className="btn warning" onClick={estimateGas}>Estimate Gas</button>
+        </div>
+        {gasEstimate && <p className="success-message">Estimated Gas: {gasEstimate}</p>}
+      </div>
+
+      <div className="box">
+        <div className="btn-container">
+          <button className="btn danger" onClick={sendTransaction}>Send Transaction</button>
+        </div>
+        {transactionHash && <p className="success-message">Transaction Hash: {transactionHash}</p>}
+      </div>
     </div>
-  )}
-
-  <div className="box">
-    <h4>Generated Call Data</h4>
-    <textarea className="textarea" readOnly value={callData || "No call data generated yet"} />
-  </div>
-
-  <div className="box">
-  <div className="btn-container">
-  <button className="btn warning" onClick={estimateGas}>Estimate Gas</button>
-</div>
-    {gasEstimate && <p className="success-message">Estimated Gas: {gasEstimate}</p>}
-  </div>
-
-  <div className="box">
-  <div className="btn-container">
-  <button className="btn danger" onClick={sendTransaction}>Send Transaction</button>
-</div>
-    {transactionHash && <p className="success-message">Transaction Hash: {transactionHash}</p>}
-  </div>
-</div>
   );
 }
 
