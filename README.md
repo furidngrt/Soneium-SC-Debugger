@@ -1,50 +1,64 @@
-# React + TypeScript + Vite
+# Soneium Smart Contract Debugger
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 A Simple debugging tool to interact with and test smart contracts on the Soneium blockchain.  
+Easily fetch contract ABIs, generate call data, estimate gas, and send transactions directly from the interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Features
+- **📡 Fetch Contract ABI** - Retrieve the ABI of deployed contracts
+- **⚙️ Select Function & Input Parameters** - Call any contract function dynamically
+- **📜 Generate Call Data** - Convert function inputs into encoded transaction data
+- **⛽ Estimate Gas** - Get gas estimates before sending transactions
+- **🚀 Send Transaction** - Directly interact with contracts on the Soneium network
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠 Installation & Setup
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### **1️⃣ Clone the repository**
+```sh
+git clone https://github.com/yourusername/soneium-debugger.git
+cd soneium-debugger
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### **2️⃣ Install dependencies**
+```sh
+npm install
 ```
+
+### **3️⃣ Run the development server**
+```sh
+npm run dev
+```
+_Open `http://localhost:5173` in your browser._
+
+---
+
+## 🏗 Deployment
+To build the project for production, run:
+```sh
+npm run build
+```
+For Vercel deployment:
+```sh
+vercel deploy
+```
+
+---
+
+## 🎮 How to Use
+1. **Connect Metamask** by clicking the "Connect Wallet" button.
+2. **Enter Contract Address** and click "Fetch" to retrieve its ABI.
+3. **Select a function** from the dropdown.
+4. **Provide function parameters** (if required).
+5. Click **"Generate Call Data"** to encode the transaction data.
+6. **Estimate Gas** before sending the transaction.
+7. Click **"Send Transaction"** to execute the function on-chain.
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.
+
+
