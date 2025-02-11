@@ -18,7 +18,7 @@ Easily fetch contract ABIs, generate call data, estimate gas, and send transacti
 
 ### **1️⃣ Clone the repository**
 ```sh
-git clone https://github.com/yourusername/soneium-debugger.git
+git clone https://github.com/furidngrt/soneium-debugger.git
 cd soneium-debugger
 ```
 
