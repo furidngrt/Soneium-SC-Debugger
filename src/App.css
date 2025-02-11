@@ -1,0 +1,194 @@
+/* ====== Style Global ====== */
+body {
+  background-color: #1e1e1e;
+  color: white;
+  font-family: "SF Mono", Monaco, monospace;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ====== Container Utama ====== */
+.app-container {
+  width: 90%;
+  max-width: 1000px;
+  background: #282c34;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* ====== Header ====== */
+.header {
+  text-align: center;
+  font-size: 8px; /* Lebih kecil agar proporsional */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* ====== Tombol Connect Wallet di Pojok Kanan ====== */
+.connect-container {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.connect-btn {
+  padding: 8px 12px;
+  background: #17a2b8;
+  border: none;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 130px;
+  transition: background 0.2s ease-in-out;
+}
+
+.connect-btn:hover {
+  background: #0056b3;
+}
+
+/* ====== Box Container ====== */
+.box {
+  background: #1b1b1b;
+  padding: 18px;
+  border-radius: 8px;
+  margin-top: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== Input, Dropdown, Textarea ====== */
+.input,
+.dropdown,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 5px;
+  background: #333;
+  color: white;
+  font-size: 14px;
+}
+
+/* ====== Tombol ====== */
+.btn {
+  width: auto; /* Tidak full width */
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: transform 0.1s ease-in-out;
+  display: block;
+  text-align: center;
+  min-width: 130px;
+  margin: 5px auto; /* Agar rata tengah */
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn.success {
+  background: #17a2b8;
+}
+
+.btn.warning {
+  background: #17a2b8;
+  color: black;
+}
+
+.btn.danger {
+  background: #17a2b8;
+}
+
+.btn.info {
+  background: #17a2b8;
+}
+
+/* ====== Centering Buttons ====== */
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ====== Pesan Sukses ====== */
+.success-message {
+  background: #198754;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* ====== Address Pendek ====== */
+.short-address {
+  font-size: 14px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* ====== Responsif Mobile ====== */
+@media (max-width: 768px) {
+  .app-container {
+    width: 92%;
+    padding: 18px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .header {
+    font-size: 8px; /* Ukuran header lebih kecil */
+  }
+
+  .connect-container {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .connect-btn {
+    width: 65%;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .btn-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ====== Input & Textarea Mobile Fix ====== */
+  .input,
+  .dropdown,
+  .textarea {
+    width: 96%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 6px;
+    background: #333;
+    color: white;
+    font-size: 14px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .textarea {
+    min-height: 50px;
+  }
+}
