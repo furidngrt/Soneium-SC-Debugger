@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import "./app.css";
+import "./App.css";
 
 const ETHERSCAN_API_KEY = "ebb6b7fd-850a-4329-8bad-2457c2e32dc3";
 
